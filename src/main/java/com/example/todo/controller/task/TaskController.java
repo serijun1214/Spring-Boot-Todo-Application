@@ -9,7 +9,13 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String list (Model model) {
-        model.addAttribute("task", "Spring Bootを学ぶ");
+        var task = new TaskDTO(
+                1L,
+                "Spring Bootを 学ぶ",
+                "TODO アプリケーションを作ってみる",
+                "TODO"
+        );
+        model.addAttribute("task", task);
         return "tasks/list";
     }
 }
