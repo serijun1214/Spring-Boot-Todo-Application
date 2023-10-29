@@ -22,4 +22,9 @@ public class TaskController {
         model.addAttribute("taskList", taskList);
         return "tasks/list";
     }
+
+    @GetMapping("/tasks/detail")
+    public String showDetail () {
+        return "tasks/detail";
+    }
 }
