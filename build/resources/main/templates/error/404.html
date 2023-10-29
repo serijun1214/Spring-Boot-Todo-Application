@@ -5,15 +5,15 @@
       layout:decorate="~{layout/layout}"
 >
 <head>
-    <title>タスク詳細</title>
+  <title>トップページ</title>
 </head>
 <body>
 <section layout:fragment="content">
-    <div th:object="${task}">
-        <h2 th:text="'#' + *{id} + ' ' + *{summary}"></h2>
-        <p th:text="*{status}"></p>
-        <pre th:text="*{description}"></pre>
-    </div>
+  <div class="text-center">
+    <h1 class="display-1">404 Not Found</h1>
+    <p>お探しのページは見つかりません</p>
+    <a th:href="@{/}" class="btn btn-primary mt-3">トップページに戻る</a>
+  </div>
 </section>
 </body>
 </html>
