@@ -11,10 +11,15 @@ import java.util.Optional;
 public interface TaskRepository {
 
     @Select("""
+            <script>
             SELECT id, summary, description, status
             FROM tasks
-            WHERE
-               summary LIKE CONCAT('%', #{condition.summary}, '%')
+            <where>
+              <if test='condition.summary != null and !condition.summary.isBlank()'>
+              summary LIKE CONCAT('%', #{condition.summary}, '%')
+              </if>
+            </where>
+            </script>
             """)
     List<TaskEntity> select(@Param("condition") TaskSearchEntity condition);
 
