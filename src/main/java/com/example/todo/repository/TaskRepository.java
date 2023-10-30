@@ -31,4 +31,7 @@ public interface TaskRepository {
                id = #{task.id}
             """)
     void update(@Param("task") TaskEntity entity);
+
+    @Delete("DELETE FROM tasks WHERE id = #{taskId}")
+    void deleteById(@Param("taskId") long id);
 }
