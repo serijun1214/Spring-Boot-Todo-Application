@@ -60,4 +60,10 @@ public class TaskController {
         model.addAttribute("mode", "EDITE");
         return "tasks/form";
     }
+
+    @PutMapping("/{id}")
+    public String update(@PathVariable("id") long id) {
+        return "redirect:/tasks/{id}";
+    }
+
 }
