@@ -1,12 +1,17 @@
 package com.example.todo.controller.task;
 
+import com.example.todo.service.task.TaskSearchEntity;
 import com.example.todo.service.task.TaskService;
+import com.example.todo.service.task.TaskStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,10 +22,14 @@ public class TaskController {
 
     @GetMapping
     public String list (TaskSearchForm searchForm, Model model) {
-        var taskList = taskService.find()
+        var statusEntityList = Optional.ofNullable(searchForm.status())
+                .map(statusList -> statusList.stream().map(TaskStatus::valueOf).toList())
+                .orElse(List.of());
+
+        var searchEntity = new TaskSearchEntity(searchForm.summary(),statusEntityList);
+        var taskList = taskService.find(searchEntity)
                 .stream()
-                .map(TaskDTO::toDTO
-                )
+                .map(TaskDTO::toDTO)
                 .toList();
         model.addAttribute("taskList", taskList);
         return "tasks/list";
