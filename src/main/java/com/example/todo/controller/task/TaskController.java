@@ -31,4 +31,9 @@ public class TaskController {
         model.addAttribute("task", TaskDTO.toDTO(taskEntity));
         return "tasks/detail";
     }
+
+    @GetMapping("/tasks/creationForm")
+    public String showCreationForm() {
+        return "tasks/form";
+    }
 }
